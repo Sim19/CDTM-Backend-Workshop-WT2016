@@ -91,10 +91,9 @@ def del_task(list_id, task_id):
         json_abort(404, "no such task with given task_id")
 
     for t in tasks_with_id:
-            taskArray.remove(t)
+        taskArray.remove(t)
 
-    result = True
-    return jsonify(result, __dict__)
+    return jsonify({"result":True})
 
 # ------------------------------------------------------------------------------
 # ---------------------   LISTS & TASKS   --------------------------------------
