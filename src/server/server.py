@@ -8,7 +8,7 @@ from utils import json_abort
 
 import sys
 
-VERSION =4.0
+VERSION =5.0
 # allow special characters (e.g. üäö ...)
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -78,6 +78,23 @@ def add_task(list_id):
     taskArray.append(task_new)
 
     return jsonify(task_new, __dict__)
+
+
+# DELETE
+@app.route('/api/lists/<int:list_id>/tasks/<int:task_id>', methods=['POST'])
+def del_task(list_id, task_id):
+    if list_id not in ID:
+        json_abort(404, "No list with given ID")
+
+    tasks_with_id = [t for t in taskArray if t.id == task_id and t.list == list_id]
+    if len(tasks_with_id) < 1:
+        json_abort(404, "no such task with given task_id")
+
+    for t in tasks_with_id:
+            taskArray.remove(t)
+
+    result = True
+    return jsonify(result, __dict__)
 
 # ------------------------------------------------------------------------------
 # ---------------------   LISTS & TASKS   --------------------------------------
