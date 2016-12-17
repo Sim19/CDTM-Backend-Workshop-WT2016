@@ -8,7 +8,7 @@ from utils import json_abort
 
 import sys
 
-VERSION =5.0
+VERSION =6.0
 # allow special characters (e.g. üäö ...)
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -77,11 +77,11 @@ def add_task(list_id):
 
     taskArray.append(task_new)
 
-    return jsonify(task_new, __dict__)
+    return jsonify(task_new.__dict__)
 
 
 # DELETE
-@app.route('/api/lists/<int:list_id>/tasks/<int:task_id>', methods=['POST'])
+@app.route('/api/lists/<int:list_id>/tasks/<int:task_id>', methods=['DELETE'])
 def del_task(list_id, task_id):
     if list_id not in ID:
         json_abort(404, "No list with given ID")
@@ -94,6 +94,24 @@ def del_task(list_id, task_id):
         taskArray.remove(t)
 
     return jsonify({"result":True})
+
+# Update
+@app.route('/api/lists/<int:list_id>/tasks/<int:task_id>', methods=['PUT'])
+def update_task(list_id, task_id):
+    try:
+        data = request.get_json()
+    except:
+        json_abort(404, "no JSON provided")
+
+    tasks_with_id = [t for t in taskArray if t.id == task_id and t.list == list_id]
+    if len(tasks_with_id) < 1:
+        json_abort(404, "no such task with given task_id")
+
+    for t in tasks_with_id:
+        t.update_json_task(data)
+
+    return jsonify(taskArray[0].__dict__)
+
 
 # ------------------------------------------------------------------------------
 # ---------------------   LISTS & TASKS   --------------------------------------
