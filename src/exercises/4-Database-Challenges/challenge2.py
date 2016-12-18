@@ -54,6 +54,6 @@ if __name__ == '__main__':
     # TODO: Add another user
     db_add_cookie(1, 'Chocolate Cookie')
     db_add_cookie(2, "Schweinebraten")
-    db_add_cookie(3, "")
+    db_add_cookie(3, "Kaiserschmarrn")
 
     # TODO: Add some more cookies
