@@ -36,7 +36,7 @@ def db_add_user(name):
 # TODO: Insert a new cookie
 def db_add_cookie(user_id, cookie_type):
     # Save your SQL query as a string into the variable query
-    query = 'INSERT INTO Cookies (owner, type) VALUES (?,?)'
+    query = 'INSERT INTO cookies (owner, type) VALUES (?,?)'
 
     db = get_db()
     cur = db.cursor()

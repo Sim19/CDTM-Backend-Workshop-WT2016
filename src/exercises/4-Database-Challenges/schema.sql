@@ -13,4 +13,4 @@ CREATE TABLE Cookies(
     owner   INTEGER        NOT NULL,
     type    TEXT           NOT NULL DEFAULT 'Zimtstern',
     FOREIGN KEY(owner) REFERENCES Users(id)
-    );
+);
