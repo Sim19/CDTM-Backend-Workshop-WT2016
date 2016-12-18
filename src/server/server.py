@@ -5,7 +5,7 @@ from flask import Flask, send_file, jsonify, request
 from list import List
 from task import Task
 from utils import json_abort
-
+import database
 import sys
 
 VERSION =6.0
@@ -136,4 +136,5 @@ taskArray = [
 
 if __name__ == '__main__':
     app.run(host='localhost', port=1337, debug=True)
+    init_db()
 
